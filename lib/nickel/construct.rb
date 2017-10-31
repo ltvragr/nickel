@@ -39,13 +39,13 @@ module Nickel
     attr_accessor :repeats, :repeats_on
 
     def interpret
-      if [:daily, :altdaily, :threedaily].include?(repeats)
+      if %i(daily altdaily threedaily).include?(repeats)
         interpret_daily_variant
-      elsif [:weekly, :altweekly, :threeweekly].include?(repeats)
+      elsif %i(weekly altweekly threeweekly).include?(repeats)
         interpret_weekly_variant
-      elsif [:daymonthly, :altdaymonthly, :threedaymonthly].include?(repeats)
+      elsif %i(daymonthly altdaymonthly threedaymonthly).include?(repeats)
         interpret_daymonthly_variant
-      elsif [:datemonthly, :altdatemonthly, :threedatemonthly].include?(repeats)
+      elsif %i(datemonthly altdatemonthly threedatemonthly).include?(repeats)
         interpret_datemonthly_variant
       else
         fail StandardError, 'self is an invalid variant, check value of self.repeats'
@@ -58,11 +58,11 @@ module Nickel
     end
 
     def interval
-      if [:daily, :weekly, :daymonthly, :datemonthly].include?(repeats)
+      if %i(daily weekly daymonthly datemonthly).include?(repeats)
         1
-      elsif [:altdaily, :altweekly, :altdaymonthly, :altdatemonthly].include?(repeats)
+      elsif %i(altdaily altweekly altdaymonthly altdatemonthly).include?(repeats)
         2
-      elsif [:threedaily, :threeweekly, :threedaymonthly, :threedatemonthly].include?(repeats)
+      elsif %i(threedaily threeweekly threedaymonthly threedatemonthly).include?(repeats)
         3
       else
         fail StandardError, 'self.repeats is invalid!!'
